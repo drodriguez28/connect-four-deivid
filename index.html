@@ -33,14 +33,56 @@
 
         //color
         const COLOR_BACKGROUND = "gold";
+        const COLOR_COMP = "red";
+        const COLOR_COMP_DRK = "darkred";
         const COLOR_FRAME = "dodgerblue";
+        const COLOR_FRAME_BUTT = "royalblue";
+        const COLOR_PLAY = "green";
+        const COLOR_PLAY_DRK = "olive";
+
+
+
+        // classes 
+        class Cell {
+            constructor(left, top, w, h, row, col) {
+                this.bot = top + h;
+                this.left = left;
+                this.right = right;
+                this.top = top;
+                this.w = w;
+                this.h = h;
+                this.row = row;
+                this.col = col;
+                this.cx = left + w / 2;
+                this.cy = top + h / 2;
+                this.r = w * GRID_CIRCLE / 2;
+                this.owner = null;
+            }
+            // draw the circle 
+            draw(/** @type {CanvasRenderingContext2D} */ ctx) {
+                // owner colour 
+                let color = this.owner == null ? COLOR_BACKGROUND : this.owner ? COLOR_PLAY : COLOR_COMP;
+
+                //draw the circle
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(this.cx, this.cy, this.r, 0, Math.Pi * 2);
+                ctx.fill();
+
+            }
+
+        }
 
 
 
 
+
+        // set up thr canvas and context 
         var canv = document.createElement("canvas");
         document.body.appendChild(canv);
         var ctx = canv.getContext("2d");
+
+
         //game vaiables 
         var grid = [];
 
@@ -73,6 +115,7 @@
 
             // draw
             drawBackground();
+            drawGrid();
 
             //call the next frame 
             requestAnimationFrame(loop);
@@ -94,23 +137,23 @@
                 marginY = (height - cell * GRID_ROWS) / 2;
                 //landscape 
             }
-                else {
-                    cell = (height - margin * 2)/GRID_ROWS;
-                    marginX = (width - cell * GRID_COLS)/2;
-                    marginY = margin; 
-                }
-
-                //populate the grid 
-                for (let i = 0; i< GRID_ROWS; i++){
-                    grid[i]=[];
-                    for (let j =0; j < GRID_COLS; j++)
-                    let left= marginX + j * cell;
-                    let top = marginY + i * cell;
-                    grid[i][j] = new Cell(left, top, cell, cell, i,j);
-                }
+            else {
+                cell = (height - margin * 2) / GRID_ROWS;
+                marginX = (width - cell * GRID_COLS) / 2;
+                marginY = margin;
             }
 
-        
+            //populate the grid 
+            for (let i = 0; i < GRID_ROWS; i++) {
+                grid[i] = [];
+                for (let j = 0; j < GRID_COLS; j++)
+                    let left = marginX + j * cell;
+                let top = marginY + i * cell;
+                grid[i][j] = new Cell(left, top, cell, cell, i, j);
+            }
+        }
+
+
 
 
         function drawBackground() {
@@ -125,7 +168,14 @@
             createGrid();
         }
 
-
+        function drawGrid() {
+            //frame and butt
+            let cell = grid[0][0];
+            let fh = cell.h * GRID_ROWS;
+            let fw = cell.w * GRID_COLS;
+            ctx.fillStyle = COLOR_FRAME;
+            ctx.fillRect(cell.left, cell.top, fw, fh);
+        }
 
 
         function setDimensions() {

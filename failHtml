@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 
 <head>
@@ -161,6 +161,16 @@
             ctx.fillRect(0, 0, width, height)
         }
 
+        function drawGrid() {
+            // frame and butt
+
+            let cell = grid[0][0];
+            let fh = cell.h * GRID_ROWS;
+            let fw = cell.w * GRID_COLS;
+            ctx.fillStyle = COLOR_FRAME;
+            ctx.fillRect(cell.left, cell.top, fw, fh);
+        }
+
 
 
 
@@ -196,4 +206,4 @@
 </html>
 
 
-<!-- left off on 17:01 https://www.youtube.com/watch?v=vzxCC5ggyUc -->
+left off on 17:01 https://www.youtube.com/watch?v=vzxCC5ggyUc -->

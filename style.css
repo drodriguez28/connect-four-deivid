@@ -1,3 +1,14 @@
 body {
-    background-color: gold;
+    text-align: center;
+}
+
+#connect4 {
+    background-color: yellow;
+    display: inline-block;
+}
+
+.col{
+    width: 70px;
+    height: 70;;
+    display: inline-block;
 }

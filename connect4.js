@@ -2,28 +2,37 @@ class Connect4 {
     constructor(selector) {
         this.ROWS = 6;
         this.COLS = 7;
-        this.selector = selector
+        this.selector = selector;
         this.createGrid();
 
 
     }
+
     createGrid() {
         const $board = $(this.selector);
         for (let row = 0; row < this.ROWS; row++) {
             const $row = $('<div>')
                 .addClass('row');
             for (let col = 0; col < this.COLS; col++) {
-                const $col = $('div')
+                const $col = $('<div>')
                     .addClass('col empty');
                 $row.append($col);
             }
-            $board.append($row);
-        }
 
+            $board.append($row);
+
+        }
     }
 
-
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -48,7 +57,7 @@ class Connect4 {
 //       this.createGrid();
 //       this.setupEventListeners();
 //     }
-  
+
 //     createGrid() {
 //       const $board = $(this.selector);
 //       $board.empty();
@@ -67,11 +76,11 @@ class Connect4 {
 //         $board.append($row);
 //       }
 //     }
-  
+
 //     setupEventListeners() {
 //       const $board = $(this.selector);
 //       const that = this;
-  
+
 //       function findLastEmptyCell(col) {
 //         const cells = $(`.col[data-col='${col}']`);
 //         for (let i = cells.length - 1; i >= 0; i--) {
@@ -82,18 +91,18 @@ class Connect4 {
 //         }
 //         return null;
 //       }
-  
+
 //       $board.on('mouseenter', '.col.empty', function() {
 //         if (that.isGameOver) return;
 //         const col = $(this).data('col');
 //         const $lastEmptyCell = findLastEmptyCell(col);
 //         $lastEmptyCell.addClass(`next-${that.player}`);
 //       });
-  
+
 //       $board.on('mouseleave', '.col', function() {
 //         $('.col').removeClass(`next-${that.player}`);
 //       });
-  
+
 //       $board.on('click', '.col.empty', function() {
 //         if (that.isGameOver) return;
 //         const col = $(this).data('col');
@@ -101,7 +110,7 @@ class Connect4 {
 //         $lastEmptyCell.removeClass(`empty next-${that.player}`);
 //         $lastEmptyCell.addClass(that.player);
 //         $lastEmptyCell.data('player', that.player);
-  
+
 //         const winner = that.checkForWinner(
 //           $lastEmptyCell.data('row'), 
 //           $lastEmptyCell.data('col')
@@ -112,20 +121,20 @@ class Connect4 {
 //           $('.col.empty').removeClass('empty');
 //           return;
 //         }
-  
+
 //         that.player = (that.player === 'red') ? 'black' : 'red';
 //         that.onPlayerMove();
 //         $(this).trigger('mouseenter');
 //       });
 //     }
-  
+
 //     checkForWinner(row, col) {
 //       const that = this;
-  
+
 //       function $getCell(i, j) {
 //         return $(`.col[data-row='${i}'][data-col='${j}']`);
 //       }
-  
+
 //       function checkDirection(direction) {
 //         let total = 0;
 //         let i = row + direction.i;
@@ -144,7 +153,7 @@ class Connect4 {
 //         }
 //         return total;
 //       }
-  
+
 //       function checkWin(directionA, directionB) {
 //         const total = 1 +
 //           checkDirection(directionA) +
@@ -155,29 +164,29 @@ class Connect4 {
 //           return null;
 //         }
 //       }
-  
+
 //       function checkDiagonalBLtoTR() {
 //         return checkWin({i: 1, j: -1}, {i: 1, j: 1});
 //       }
-  
+
 //       function checkDiagonalTLtoBR() {
 //         return checkWin({i: 1, j: 1}, {i: -1, j: -1});
 //       }
-  
+
 //       function checkVerticals() {
 //         return checkWin({i: -1, j: 0}, {i: 1, j: 0});
 //       }
-  
+
 //       function checkHorizontals() {
 //         return checkWin({i: 0, j: -1}, {i: 0, j: 1});
 //       }
-  
+
 //       return checkVerticals() || 
 //         checkHorizontals() || 
 //         checkDiagonalBLtoTR() ||
 //         checkDiagonalTLtoBR();
 //     }
-  
+
 //     restart () {
 //       this.createGrid();
 //       this.onPlayerMove();
